@@ -23,7 +23,7 @@ function Navbar() {
 
       <nav className={menuOpen ? "nav-links nav-open" : "nav-links"}>
         <a href="#about" onClick={closeMenu}>ABOUT</a>
-        <a href="#projects" onClick={closeMenu}>PROJECTS</a>
+        <a href="#work" onClick={closeMenu}>PROJECTS</a>
         <a href="#capabilities" onClick={closeMenu}>SKILLS</a>
         <a href="#contact" onClick={closeMenu}>CONTACT</a>
       </nav>

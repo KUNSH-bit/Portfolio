@@ -54,7 +54,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="projects-section" id="projects">
+    <section className="projects-section" id="work">
       <div className="projects-heading">
         <div>
           <h2 className="section-heading">PROJECTS BY ME<span>.</span></h2>

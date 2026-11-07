@@ -83,7 +83,7 @@ function Hero() {
           </p>
         </div>
 
-        <a href="#projects" className="explore-work">
+        <a href="#work" className="explore-work">
           EXPLORE MY WORK
           <ArrowUpRight size={17} />
         </a>
