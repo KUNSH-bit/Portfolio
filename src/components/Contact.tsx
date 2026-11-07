@@ -14,7 +14,7 @@ const socials = [
   },
   {
     name: "Instagram",
-    url: "https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/",
+    url: "https://www.instagram.com/kunsh_error.404/",
     icon: "instagram" as const,
   },
 ];

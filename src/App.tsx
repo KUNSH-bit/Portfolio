@@ -24,6 +24,7 @@ useEffect(() => {
   const lenis = new Lenis({
     duration: 1.2,
     smoothWheel: true,
+    anchors: true,
   });
 
   // Smoothly scroll to internal sections when navigation links are clicked.

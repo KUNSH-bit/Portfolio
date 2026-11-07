@@ -2,22 +2,27 @@ const capabilities = [
   {
     number: "01",
     title: "PROGRAMMING",
-    items: "Python · C++ · Java · JavaScript · Rust",
+    items: "Python · C · C++  · Rust · Flutter",
   },
   {
     number: "02",
     title: "WEB DEVELOPMENT",
-    items: "HTML · CSS · React · TypeScript",
+    items: "HTML · CSS · React · TypeScript · JavaScript · Vite",
   },
   {
     number: "03",
-    title: "AI & COMPUTER VISION",
-    items: "OpenCV · MediaPipe · AI/ML fundamentals",
+    title: "FRAMEWORK & TOOLS",
+    items: "SQL · SQLite · Dart · Git · Github",
   },
   {
     number: "04",
+    title: "AI & COMPUTER VISION",
+    items: "OpenCV · MediaPipe · AI/ML fundamentals · Skitlib ",
+  },
+  {
+    number: "05",
     title: "HARDWARE & EMBEDDED",
-    items: "Arduino · ESP32 · Sensors · Prototyping",
+    items: "Arduinos · ESP32 · Sensors · Prototyping",
   },
 ];
 
@@ -36,7 +41,7 @@ function Capabilities() {
         <h2>
           MY TECH
           <br />
-          TOOLKIT<span>.</span>
+          STACK<span>.</span>
         </h2>
         <p>
           A growing collection of technologies I use
