@@ -1,78 +1,56 @@
-import {
-  ArrowUpRight,
-  Github,
-  Linkedin,
-  Instagram,
-  Mail,
-} from "lucide-react";
 
-function Contact() {
+import SocialIcon from "./SocialIcons";
+
+const socials = [
+  {
+    name: "GitHub",
+    url: "https://github.com/KUNSH-bit",
+    icon: "github" as const,
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/kunsh-agarwal-bb3392416/",
+    icon: "linkedin" as const,
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/",
+    icon: "instagram" as const,
+  },
+];
+
+export default function Contact() {
   return (
-    <section className="contact section-padding" id="contact">
-      <div className="section-heading reveal">
-        <span className="section-number">04 — CONTACT</span>
-        <span className="section-note">HAVE AN IDEA?</span>
-      </div>
-
+    <section className="contact-section" id="contact">
       <div className="contact-content">
-        <span className="contact-eyebrow reveal">
-          LET'S CONNECT
-        </span>
+        <p className="eyebrow reveal">HAVE A PROJECT IN MIND?</p>
 
-        <h2 className="contact-title reveal">
-          HAVE SOMETHING
+        <h2 className="contact-title">
+          LET'S BUILD
           <br />
-          IN MIND<span>?</span>
+          SOMETHING.
         </h2>
 
         <div className="contact-socials reveal">
-          <a
-            href="https://github.com/KUNSH-bit"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Github size={17} />
-            GITHUB
-            <ArrowUpRight size={13} />
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/kunsh-agarwal-bb3392416/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Linkedin size={17} />
-            LINKEDIN
-            <ArrowUpRight size={13} />
-          </a>
-
-          <a
-            href="https://www.instagram.com/kunsh_error.404/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Instagram size={17} />
-            INSTAGRAM
-            <ArrowUpRight size={13} />
-          </a>
+          {socials.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noreferrer"
+              className="social-link"
+            >
+              <SocialIcon name={social.icon} />
+              <span>{social.name}</span>
+              <span className="social-arrow">↗</span>
+            </a>
+          ))}
         </div>
 
-        <a
-          href="mailto:kunsh.agarwak26b@iiitg.ac.in"
-          className="contact-button"
-        >
-          <Mail size={19} />
-          GET IN TOUCH
-          <ArrowUpRight size={19} />
+        <a className="contact-email" href="mailto:YOUR_EMAIL@example.com">
+          GET IN TOUCH ↗
         </a>
-
-        <p className="contact-description">
-          Open to interesting projects, collaborations
-          and learning opportunities.
-        </p>
       </div>
     </section>
   );
 }
-
-export default Contact;

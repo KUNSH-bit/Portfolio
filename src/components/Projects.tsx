@@ -1,148 +1,115 @@
-import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
     number: "01",
-    title: "AI Gesture Engine",
-    category: "COMPUTER VISION / PYTHON",
+    name: "AI Gesture Engine",
+    category: "COMPUTER VISION / DESKTOP AUTOMATION",
     description:
-      "An offline gesture-based computer control system using webcam input, MediaPipe hand landmarks and rule-based gesture recognition.",
-    technologies: ["Python", "OpenCV", "MediaPipe", "PyAutoGUI"],
-    className: "project-gesture",
-    label: "VISION",
-    github: "https://github.com/KUNSH-bit/AI-Gesture-Engine",
+      "A real-time, offline gesture recognition system that turns hand movements into desktop commands. It tracks 21 hand landmarks, classifies gestures, and uses cooldowns and temporal filtering to make interactions more stable.",
+    stack: ["Python", "OpenCV", "MediaPipe", "PyAutoGUI"],
+    symbol: "01 / VISION",
+    repo: "https://github.com/KUNSH-bit/AI-Gesture-Engine",
   },
   {
     number: "02",
-    title: "GaonKhiladi",
-    category: "MOBILE DEVELOPMENT / SIH",
+    name: "GaonKhiladi",
+    category: "MOBILE / OFFLINE-FIRST",
     description:
-      "An offline-first athlete discovery platform connecting athletes and coaches through sports profiles, leaderboards and performance indicators.",
-    technologies: ["Flutter", "Dart", "Mobile UI"],
-    className: "project-gaon",
-    label: "SPORTS TECH",
-    github: "https://github.com/KUNSH-bit/SIH-26-gaon_khiladi_",
+      "An athlete discovery and development platform designed to connect athletes with coaches and recruiters. It brings together athlete profiles, performance benchmarks, leaderboards, and tournament workflows, with an emphasis on offline access.",
+    stack: ["Flutter", "Dart", "Android", "Local Storage"],
+    symbol: "02 / SPORT",
+    repo: "https://github.com/KUNSH-bit/SIH-26-gaon_khiladi-",
   },
   {
     number: "03",
-    title: "Rust File Manager",
-    category: "SYSTEMS / RUST",
+    name: "Rust File Manager",
+    category: "SYSTEMS / CLI TOOL",
     description:
-      "A command-line file management utility designed to organize files and provide a simple preview workflow.",
-    technologies: ["Rust", "CLI", "File Systems"],
-    className: "project-rust",
-    label: "SYSTEMS",
-    github: "https://github.com/KUNSH-bit/File-Management-System-Rust-",
+      "A command-line file management tool built in Rust. It organizes files through filesystem operations and provides a preview option so users can inspect intended changes before applying them.",
+    stack: ["Rust", "CLI", "File System", "Cargo"],
+    symbol: "03 / SYSTEMS",
+    repo: "https://github.com/KUNSH-bit/File-Management-System-Rust-",
   },
   {
     number: "04",
-    title: "ESP32 Chess",
-    category: "EMBEDDED SYSTEMS",
+    name: "ESP32 Chess",
+    category: "EMBEDDED SYSTEMS / GAME",
     description:
-      "An embedded chess-game project built around an ESP32, an ILI9341 display and physical input buttons.",
-    technologies: ["ESP32", "Arduino", "C++", "ILI9341"],
-    className: "project-chess",
-    label: "EMBEDDED",
-    github: "https://github.com/KUNSH-bit/esp-32-Chess-game",
+      "An embedded chess interface built around an ESP32 and an ILI9341 display, with physical buttons for player input. The project explores the intersection of firmware, display handling, and interactive game logic.",
+    stack: ["ESP32", "Arduino C++", "ILI9341", "Embedded C++"],
+    symbol: "04 / EMBEDDED",
+    repo: "https://github.com/KUNSH-bit/esp-32-Chess-game",
   },
   {
     number: "05",
-    title: "Crash Detection Helmet",
-    category: "IOT / HARDWARE",
+    name: "Crash Detection Helmet",
+    category: "IOT / SAFETY SYSTEM",
     description:
-      "An Arduino-based crash detection prototype using an MPU6050 motion sensor and Bluetooth communication for alerts.",
-    technologies: ["Arduino", "MPU6050", "HC-05", "C++"],
-    className: "project-helmet",
-    label: "IOT",
-    github: "https://github.com/KUNSH-bit/Crash-Detection-Helmet",
+      "An Arduino-based prototype that uses motion sensing to detect possible crash events. It combines an MPU6050 sensor with Bluetooth communication to send an alert, including a cancellation window to reduce accidental notifications.",
+    stack: ["Arduino", "C++", "MPU6050", "HC-05"],
+    symbol: "05 / IOT",
+    repo: "https://github.com/KUNSH-bit/Crash-Detection-Helmet",
   },
 ];
 
-function Projects() {
+export default function Projects() {
   return (
-    <section className="projects section-padding" id="work">
-      <div className="section-heading reveal">
-        <span className="section-number">02 — SELECTED WORK</span>
-        <span className="section-note">A COLLECTION OF EXPERIMENTS & BUILDS</span>
-      </div>
-
-      <div className="projects-intro reveal">
-        <h2>SELECTED<br />PROJECTS<span>.</span></h2>
-        <p>
-          A few things I've built while exploring software,
-          artificial intelligence and hardware.
+    <section className="projects-section" id="projects">
+      <div className="projects-heading">
+        <div>
+          <h2 className="section-heading">PROJECTS BY ME<span>.</span></h2>
+        </div>
+        <p className="projects-instruction">
+          SCROLL TO EXPLORE <span>→</span>
         </p>
       </div>
 
-      <div className="projects-grid">
+      <div className="projects-track">
         {projects.map((project) => (
-          <article className="project-card reveal" key={project.number}>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className={`project-art ${project.className}`}
-              aria-label={`View ${project.title} on GitHub`}
-            >
-              <span className="project-art-label">{project.label}</span>
-
-              <span className="project-art-number">
-                {project.number}
-              </span>
-
-              <span className="project-art-symbol">
-                {project.number === "01" && "◎"}
-                {project.number === "02" && "↗"}
-                {project.number === "03" && "{"}
-                {project.number === "04" && "♞"}
-                {project.number === "05" && "+"}
-              </span>
-
-              <span className="project-art-open">
-                <ArrowUpRight size={22} />
-              </span>
-            </a>
-
-            <div className="project-info">
-              <div>
-                <span className="project-category">{project.category}</span>
-                <h3>{project.title}</h3>
-              </div>
-
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                className="project-link"
-                aria-label={`Open ${project.title} repository`}
-              >
-                <ArrowUpRight size={20} />
-              </a>
+          <article className="project-card" key={project.number}>
+            <div className="project-card-top">
+              <span>{project.number} / 05</span>
+              <span>{project.category}</span>
             </div>
 
-            <p className="project-description">
-              {project.description}
-            </p>
+            <div className="project-art">
+              <span className="project-art-symbol">{project.symbol}</span>
+              <span className="project-art-mark">{project.number}</span>
+              <div className="project-art-grid" />
+            </div>
 
-            <div className="project-tags">
-              {project.technologies.map((tech) => (
-                <span key={tech}>{tech}</span>
-              ))}
+            <div className="project-card-bottom">
+              <div>
+                <h3>{project.name}</h3>
+                <p className="project-description">{project.description}</p>
+              </div>
+
+              <div className="project-card-footer">
+                <div className="project-stack">
+                  {project.stack.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+
+                <a
+                  href={project.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="project-link"
+                >
+                  VIEW REPOSITORY ↗
+                </a>
+              </div>
             </div>
           </article>
         ))}
       </div>
 
-      <a
-        href="https://github.com/KUNSH-bit?tab=repositories"
-        target="_blank"
-        rel="noreferrer"
-        className="all-projects-link reveal"
-      >
-        VIEW MORE PROJECTS <ArrowUpRight size={17} />
-      </a>
+      <div className="projects-progress">
+        <span>KEEP SCROLLING TO EXPLORE</span>
+        <span className="projects-progress-line" />
+        <span>05 PROJECTS</span>
+      </div>
     </section>
   );
 }
-
-export default Projects;

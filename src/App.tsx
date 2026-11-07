@@ -3,49 +3,64 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Capabilities from "./components/Capabilities";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import TechVisual from "./components/TechVisual";
 
 import "./App.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      lerp: 0.075,
-      smoothWheel: true,
-    });
+  
+useEffect(() => {
+  gsap.registerPlugin(ScrollTrigger);
 
-    const updateScroll = () => ScrollTrigger.update();
+  const lenis = new Lenis({
+    duration: 1.2,
+    smoothWheel: true,
+  });
 
-    const raf = (time: number) => {
-      lenis.raf(time * 1000);
-    };
+  // Smoothly scroll to internal sections when navigation links are clicked.
+  const handleAnchorClick = (event: MouseEvent) => {
+    const targetElement = event.target as HTMLElement;
+    const link = targetElement.closest<HTMLAnchorElement>('a[href^="#"]');
 
-    lenis.on("scroll", updateScroll);
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
+    if (!link) return;
 
-    const context = gsap.context(() => {
-      // General reveal animations
-      gsap.utils
-  .toArray<HTMLElement>(
-    ".reveal:not(.project-card):not(.section-heading):not(.capability-row):not(.contact-title)"
-  )
-  .forEach((element) => {
+    const hash = link.getAttribute("href");
+    if (!hash || hash === "#") return;
+
+    const section = document.querySelector(hash);
+    if (!section) return;
+
+    event.preventDefault();
+    lenis.scrollTo(section, { offset: -80 });
+  };
+
+  document.addEventListener("click", handleAnchorClick);
+
+  const update = (time: number) => {
+    lenis.raf(time * 1000);
+  };
+
+  gsap.ticker.add(update);
+  gsap.ticker.lagSmoothing(0);
+
+  // General reveal animations.
+  gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => {
     gsap.fromTo(
       element,
       { y: 45, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 1,
+        duration: 0.9,
         ease: "power3.out",
         scrollTrigger: {
           trigger: element,
@@ -56,139 +71,95 @@ function App() {
     );
   });
 
-      // Section headings slide in from the left
-      gsap.utils
-        .toArray<HTMLElement>(".section-heading")
-        .forEach((heading) => {
-          gsap.fromTo(
-            heading,
-            {
-              x: -35,
-              opacity: 0,
-            },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.9,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: heading,
-                start: "top 90%",
-                once: true,
-              },
-            }
-          );
-        });
-
-      // Project cards enter one after another
-      gsap.fromTo(
-        ".project-card",
-        {
-          y: 90,
-          opacity: 0,
-          scale: 0.96,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".projects-grid",
-            start: "top 82%",
-            once: true,
-          },
-        }
-      );
-
-      // Capability rows slide in from alternating sides
-      gsap.utils
-        .toArray<HTMLElement>(".capability-row")
-        .forEach((row, index) => {
-          gsap.fromTo(
-            row,
-            {
-              x: index % 2 === 0 ? -55 : 55,
-              opacity: 0,
-            },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.85,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: row,
-                start: "top 90%",
-                once: true,
-              },
-            }
-          );
-        });
-
-      // Subtle hero parallax while scrolling away
-      gsap.to(".hero-title", {
-        y: -110,
-        opacity: 0.35,
-        ease: "none",
+  // Section headings enter from the left.
+  gsap.utils.toArray<HTMLElement>(".section-heading").forEach((heading) => {
+    gsap.fromTo(
+      heading,
+      { x: -70, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
+          trigger: heading,
+          start: "top 85%",
+          once: true,
         },
-      });
+      }
+    );
+  });
 
-      // Contact heading moves upward as it enters
-      gsap.fromTo(
-        ".contact-title",
-        {
-          y: 100,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: ".contact-title",
-            start: "top 85%",
-            once: true,
-          },
-        }
-      );
+  // Horizontal pinned project gallery.
+  const projectSection = document.querySelector<HTMLElement>(
+    ".projects-section"
+  );
+  const projectTrack = document.querySelector<HTMLElement>(
+    ".projects-track"
+  );
 
-      // Contact social links appear in sequence
-      gsap.fromTo(
-        ".contact-socials a",
-        {
-          y: 25,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".contact-socials",
-            start: "top 90%",
-            once: true,
-          },
-        }
-      );
+  if (projectSection && projectTrack) {
+    const getScrollDistance = () =>
+      Math.max(0, projectTrack.scrollWidth - window.innerWidth);
+
+    gsap.to(projectTrack, {
+      x: () => -getScrollDistance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: projectSection,
+        start: "top+=100 top",
+        end: () => `+=${getScrollDistance()}`,
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
     });
+  }
 
-    return () => {
-      context.revert();
-      gsap.ticker.remove(raf);
-      lenis.off("scroll", updateScroll);
-      lenis.destroy();
-    };
-  }, []);
+  // Draw circuit paths as the tech visual enters the viewport.
+  gsap.fromTo(
+    ".circuit-path",
+    { strokeDashoffset: 1 },
+    {
+      strokeDashoffset: 0,
+      duration: 2,
+      ease: "power2.inOut",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: ".tech-visual",
+        start: "top 75%",
+        once: true,
+      },
+    }
+  );
+
+  // Bring the circuit nodes online one by one.
+  gsap.fromTo(
+    ".tech-node",
+    { scale: 0, opacity: 0 },
+    {
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.15,
+      ease: "back.out(2)",
+      scrollTrigger: {
+        trigger: ".tech-visual",
+        start: "top 75%",
+        once: true,
+      },
+    }
+  );
+
+  ScrollTrigger.refresh();
+
+  return () => {
+    document.removeEventListener("click", handleAnchorClick);
+    gsap.ticker.remove(update);
+    lenis.destroy();
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  };
+}, []);
 
   return (
     <>
@@ -197,6 +168,7 @@ function App() {
       <main>
         <Hero />
         <About />
+        <TechVisual />
         <Projects />
         <Capabilities />
         <Contact />
