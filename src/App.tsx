@@ -108,7 +108,7 @@ useEffect(() => {
       ease: "none",
       scrollTrigger: {
         trigger: projectSection,
-        start: "top+=100 top",
+        start: "top+=115 top",
         end: () => `+=${getScrollDistance()}`,
         pin: true,
         scrub: 1,
